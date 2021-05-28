@@ -2,7 +2,7 @@ import pymongo
 from pymongo import MongoClient
 
 # connect to cluster
-client = MongoClient("mongodb+srv://admin:BT68FdbkPxfbALCm@users.ix3mr.mongodb.net/coach?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://admin:BT68FdbkPxfbALCm@users.ix3mr.mongodb.net/olheiro?retryWrites=true&w=majority")
 # select the database
 db = client.olheiro
 # select the collection from database
