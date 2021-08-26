@@ -8,7 +8,7 @@ class CorridasBRSpider(scrapy.Spider):
 		states = [
 			'AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA',
 			'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN',
-			'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'
+			'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO',
 		]
 
 		for state in states:
@@ -25,10 +25,10 @@ class CorridasBRSpider(scrapy.Spider):
 			for page in next_pages:
 				yield scrapy.Request(
 					url=f"{self.base_url}/{state}/{page}",
-					callback=self.parse_state_running
+					callback=self.parse_state_races
 				)
 
-	def parse_state_running(self, response):
+	def parse_state_races(self, response):
 		table_selector = "(//table)[9]"
 
 		for info in response.xpath(table_selector):
