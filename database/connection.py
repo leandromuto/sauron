@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 
 def get_database():
-    config = load_dotenv()
+    load_dotenv()
 
     client = MongoClient(os.environ.get("MONGO_URI")) # connect to cluster
     database = client.scout # select the database

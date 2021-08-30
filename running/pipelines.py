@@ -1,4 +1,3 @@
-from itemadapter import ItemAdapter
 import logging
 # from scrapy.exceptions import DropItem
 from database.connection import get_database, get_collection
@@ -8,5 +7,11 @@ class MongoDBPipeline:
         self.db_collection = get_collection("races")
 
     def process_item(self, item, spider):
-        self.db_collection.insert_one(item)
-        logging.info("Race added to database.")
+        try:
+            self.db_collection.insert_one(item)
+        except Exception:
+            logging.info(f"Error: {Exception}")
+        else:
+            logging.info("General error.")
+        finally:
+            logging.info("Race added to database.")

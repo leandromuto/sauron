@@ -1,3 +1,4 @@
+
 # Define here the models for your scraped items
 #
 # See documentation in:
@@ -5,8 +6,10 @@
 
 import scrapy
 
-
-class RunningItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class Race(scrapy.Item):
+    name = scrapy.Field(),
+    date = scrapy.Field(),
+    city = scrapy.Field(),
+    distances = scrapy.Field(),
+    organizer = scrapy.Field()
+    website = scrapy.Field()

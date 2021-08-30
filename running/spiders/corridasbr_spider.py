@@ -1,4 +1,5 @@
 import scrapy
+from running.items import Race
 
 class CorridasBRSpider(scrapy.Spider):
 	name = "corridasbr"
@@ -32,11 +33,13 @@ class CorridasBRSpider(scrapy.Spider):
 		table_selector = "(//table)[9]"
 
 		for info in response.xpath(table_selector):
-			yield {
-				"name": info.css('tr span strong::text').get(),
-				"date": info.css('tr:nth-child(2) td:nth-child(2) span::text').get(),
-				"city": info.css('tr:nth-child(3) td:nth-child(2) span::text').get(),
-				"distances": info.css('tr:nth-child(4) td:nth-child(2) span::text').get(),
-				"organizer": info.css('tr:nth-child(6) td:nth-child(2) span::text').get(),
-				"website": info.css('tr:nth-child(7) td:nth-child(2) a::attr(href)').get()
-			}
+			race = Race()
+
+			race["name"] = info.css('tr span strong::text').get()
+			race["date"] = info.css('tr:nth-child(2) td:nth-child(2) span::text').get()
+			race["city"] = info.css('tr:nth-child(3) td:nth-child(2) span::text').get()
+			race["distances"] = info.css('tr:nth-child(4) td:nth-child(2) span::text').get()
+			race["organizer"] = info.css('tr:nth-child(6) td:nth-child(2) span::text').get()
+			race["website"] = info.css('tr:nth-child(7) td:nth-child(2) a::attr(href)').get()
+
+			yield race
