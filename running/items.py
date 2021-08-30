@@ -7,9 +7,10 @@
 import scrapy
 
 class Race(scrapy.Item):
-    name = scrapy.Field(),
-    date = scrapy.Field(),
-    city = scrapy.Field(),
-    distances = scrapy.Field(),
+    name = scrapy.Field()
+    date = scrapy.Field()
+    city = scrapy.Field()
+    distances = scrapy.Field()
     organizer = scrapy.Field()
     website = scrapy.Field()
+    modality = scrapy.Field()
