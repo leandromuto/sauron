@@ -63,6 +63,7 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+   'running.pipelines.RacePipeline': 1,
    'running.pipelines.MongoDBPipeline': 300,
 }
 
