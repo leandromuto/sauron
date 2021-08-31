@@ -8,10 +8,7 @@ class MongoDBPipeline:
 
     def process_item(self, item, spider):
         try:
-            self.db_collection.insert_one(item)
-        except Exception:
-            logging.info(f"Error: {Exception}")
-        else:
-            logging.info("General error.")
-        finally:
+            self.db_collection.insert_one(dict(item))
             logging.info("Race added to database.")
+        except Exception as ex:
+            logging.info(f"Error: {ex.args}")
