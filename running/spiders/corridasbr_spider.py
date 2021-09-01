@@ -35,11 +35,11 @@ class CorridasBRSpider(scrapy.Spider):
 		for info in response.xpath(table_selector):
 			race = Race()
 
-			race["name"] = info.css('tr span strong::text').get()
-			race["date"] = info.css('tr:nth-child(2) td:nth-child(2) span::text').get()
-			race["city"] = info.css('tr:nth-child(3) td:nth-child(2) span::text').get()
-			race["distances"] = info.css('tr:nth-child(4) td:nth-child(2) span::text').get()
-			race["organizer"] = info.css('tr:nth-child(6) td:nth-child(2) span::text').get()
-			race["website"] = info.css('tr:nth-child(7) td:nth-child(2) a::attr(href)').get()
+			race["name"] = info.css('tr span strong::text').get().strip()
+			race["date"] = info.css('tr:nth-child(2) td:nth-child(2) span::text').get().strip()
+			race["city"] = info.css('tr:nth-child(3) td:nth-child(2) span::text').get().strip()
+			race["distances"] = info.css('tr:nth-child(4) td:nth-child(2) span::text').get().strip()
+			race["organizer"] = info.css('tr:nth-child(6) td:nth-child(2) span::text').get().strip()
+			race["website"] = info.css('tr:nth-child(7) td:nth-child(2) a::attr(href)').get().strip()
 
 			yield race

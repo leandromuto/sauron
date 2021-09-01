@@ -10,7 +10,7 @@ class RacePipeline:
     def process_item(self, item, spider):
         spider_name = spider.name
         if spider_name == 'corridasbr':
-            item["modality"] = "running"
+            item["modality"] = "run"
 
         distances = re.findall(r"([0-9,]+)", str(item["distances"]))
         item["distances"] = distances
@@ -23,7 +23,9 @@ class MongoDBPipeline:
 
     def process_item(self, item, spider):
         try:
-            self.db_collection.insert_one(dict(item))
-            logging.info("Race added to database.")
+            doc_exist = self.db_collection.find(item)
+            if not any(doc_exist):
+                document = self.db_collection.insert_one(dict(item))
+                logging.info(f"Race added to database. Document id: {document.inserted_id}")
         except Exception as ex:
             logging.info(f"Error: {ex.args}")
