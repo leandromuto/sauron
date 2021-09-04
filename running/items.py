@@ -18,6 +18,7 @@ class Running(Race):
     distances = scrapy.Field()
 
 class Triathlon(Race):
+    distances = scrapy.Field()
     swim = scrapy.Field()
     bike = scrapy.Field()
     run = scrapy.Field()
