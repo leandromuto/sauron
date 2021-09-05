@@ -19,7 +19,6 @@ class TriathlonBRSpider(scrapy.Spider):
 
             if len(data.getall()) > 1 and not data[0].get() == "Data":
                 print(data.getall())
-                # import pdb; pdb.set_trace()
                 fwd_data = {"modality" : data[2].get().strip()}
 
                 more_info_url = race.css("a::attr(href)").get()
@@ -34,14 +33,13 @@ class TriathlonBRSpider(scrapy.Spider):
         table_content = response.xpath("(//table)[2]/tbody")
 
         for content in table_content:
-            print(content)
             tri_race = Triathlon()
 
             tri_race["modality"] = fwd_data["modality"]
             tri_race["name"] = content.css("span.titulogrande::text").get().strip()
             tri_race["date"] = content.css("tr:nth-child(3) td:nth-child(2) span::text").get().strip()
             tri_race["city"] = content.css("tr:nth-child(4) td:nth-child(2) span::text").get().strip()
-            tri_race["distances"] = content.css("tr:nth-child(5) td:nth-child(2) span::text").get().strip()
+            tri_race["distances"] = content.css("tr:nth-child(5) td:nth-child(2) span::text").getall()
             tri_race["organizer"] = content.css("tr:nth-child(6) td:nth-child(2) span::text").get().strip()
             tri_race["website"] = content.css('tr:nth-child(7) td:nth-child(2) a::attr(href)').get().strip()
 
