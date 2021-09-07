@@ -10,7 +10,15 @@ class Race(scrapy.Item):
     name = scrapy.Field()
     date = scrapy.Field()
     city = scrapy.Field()
-    distances = scrapy.Field()
     organizer = scrapy.Field()
     website = scrapy.Field()
     modality = scrapy.Field()
+
+class Running(Race):
+    distances = scrapy.Field()
+
+class Triathlon(Race):
+    distances = scrapy.Field()
+    swim = scrapy.Field()
+    bike = scrapy.Field()
+    run = scrapy.Field()

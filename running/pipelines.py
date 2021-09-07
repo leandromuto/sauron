@@ -9,11 +9,22 @@ class RacePipeline:
 
     def process_item(self, item, spider):
         spider_name = spider.name
-        if spider_name == 'corridasbr':
-            item["modality"] = "run"
+        if spider_name == "corridasbr":
+            item["modality"] = "Run"
+            distances = re.findall(r"([0-9,]+)", str(item["distances"]))
+            item["distances"] = distances
 
-        distances = re.findall(r"([0-9,]+)", str(item["distances"]))
-        item["distances"] = distances
+        elif spider_name == "triathlonbr":
+            distances = item["distances"]
+
+            if type(distances) == str:
+                distances = distances.split("-")
+            else:
+                all_dist = []
+                for dist in distances:
+                    all_dist.append(re.findall(r"[0-9KMkm]+\w", str(dist)))
+
+                item["distances"] = all_dist
 
         return item
 

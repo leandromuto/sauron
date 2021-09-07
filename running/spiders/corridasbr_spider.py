@@ -1,5 +1,5 @@
 import scrapy
-from running.items import Race
+from running.items import Running
 
 class CorridasBRSpider(scrapy.Spider):
 	name = "corridasbr"
@@ -30,10 +30,10 @@ class CorridasBRSpider(scrapy.Spider):
 				)
 
 	def parse_state_races(self, response):
-		table_selector = "(//table)[9]"
+		table_content = response.xpath("(//table)[9]")
 
-		for info in response.xpath(table_selector):
-			race = Race()
+		for info in table_content:
+			race = Running()
 
 			race["name"] = info.css('tr span strong::text').get().strip()
 			race["date"] = info.css('tr:nth-child(2) td:nth-child(2) span::text').get().strip()
